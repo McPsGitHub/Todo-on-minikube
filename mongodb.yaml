@@ -1,10 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb-deployment
+  labels:
+    app: mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo:6.0
+        ports:
+        - containerPort: 27017
+        env:
+        - name: MONGODB_DB       
+          value: "myapp" 
+        - name: MONGODB_INITDB_ROOT_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: mongo-username
+        - name: MONGODB_INITDB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: mongo-password
+   #     - name: secret-key
+   #       valueFrom:
+   #         secretKeyRef:
+   #           name: mongodb-secret
+   #          key: secret-key
+   #   - name: MONGODB_URI
+   #     value: 'mongodb://$(MONGODB_USER):$(MONGODB_PASS)@$(MONGODB_HOST):$(MONGODB_PORT)/$(MONGODB_DB)?authSource=$(MONGODB_DB)'
+---
 apiVersion: v1
 kind: Service
 metadata:
-  name: mongodb-external
+  name: mongodb-service
 spec:
   selector:
-    app: tasky
-  type: ExternalName
-  externalName: ec2-18-227-107-220.us-east-2.compute.amazonaws.com
-  #externalName: 172.31.49.50
+    app: mongodb
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
