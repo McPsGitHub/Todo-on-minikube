@@ -56,7 +56,7 @@ jobs:
  #         docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
  #         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
         with:
-          context: .
+          context: "{{defaultContext}}:mysubdir"
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
