@@ -48,22 +48,22 @@ jobs:
       
       - name: Build, tag, and push docker image
         uses: docker/build-push-action@v6.7.0     
-        env:
-          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          REPOSITORY: Todo-on-minikube
-          IMAGE_TAG: latest
- #       run: |
- #         docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
- #         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
         with:
-          context: "{{defaultContext}}:mysubdir"
+          context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-      
- #    - name: Update kube config
- #      run: aws eks update-kubeconfig --name Wiz-EKS-Cluster
-      
+          labels: ${{ steps.meta.outputs.labels }} 
+#        env:
+#          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+#          REPOSITORY: Todo-on-minikube
+#          IMAGE_TAG: latest
+#        run: |
+#          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+#          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG       
+
+#     - name: Update kube config
+#       run: aws eks update-kubeconfig --name Wiz-EKS-Cluster
+
       - name: Update MongoDB config and deploy MongoDB   
         run: |
           kubectl apply -f mongodb-secret.yaml
@@ -73,5 +73,3 @@ jobs:
       - name: Deploy webapp
         run: |
           kubectl apply -f webapp.yaml
-      
-
