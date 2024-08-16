@@ -73,7 +73,7 @@ jobs:
         run: docker pull $REGISTRY/${REPO_FULL_NAME,,}:$IMAGE_TAG
 
       - name: Run Docker container
-        run: docker run ${ env.REGISTRY }/${ env.IMAGE_NAME }:$IMAGE_TAG
+        run: docker run $REGISTRY/${REPO_FULL_NAME,,}:$IMAGE_TAG
 
       - name: Update MongoDB config and deploy MongoDB   
         run: |
