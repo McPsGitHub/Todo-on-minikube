@@ -5,6 +5,7 @@ metadata:
   labels:
     app: mongodb
 spec:
+  serviceName: mongodb-service
   replicas: 1
   selector:
     matchLabels:
@@ -16,7 +17,7 @@ spec:
     spec:
       containers:
       - name: mongodb
-        image: mongo:6.0
+        image: mongo:7.0
         ports:
         - containerPort: 27017
         env:
@@ -26,25 +27,26 @@ spec:
           valueFrom:
             secretKeyRef:
               name: mongodb-secret
-              key: mongo-username
+              key: MONGODB_INITDB_ROOT_USERNAME
         - name: MONGODB_INITDB_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
               name: mongodb-secret
-              key: mongo-password
-   #     - name: secret-key
-   #       valueFrom:
-   #         secretKeyRef:
-   #           name: mongodb-secret
-   #          key: secret-key
-   #   - name: MONGODB_URI
-   #     value: 'mongodb://$(MONGODB_USER):$(MONGODB_PASS)@$(MONGODB_HOST):$(MONGODB_PORT)/$(MONGODB_DB)?authSource=$(MONGODB_DB)'
+              key: MONGODB_INITDB_ROOT_PASSWORD
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: SECRET_KEY
+        - name: MONGODB_URI
+          value: 'mongodb://$(MONGODB_USER):$(MONGODB_PASS)@$(MONGODB_HOST):$(MONGODB_PORT)/$(MONGODB_DB)?authSource=$(MONGODB_DB)'
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: mongodb-service
 spec:
+  clusterIP: None
   selector:
     app: mongodb
   ports:
