@@ -11,7 +11,7 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /go/src/tasky/tasky
 
 
 #FROM alpine:3.17.0 as release
-FROM alpine:3.20.2 as release
+FROM alpine:3.20.2 AS release
 
 # Set the working directory to app
 WORKDIR /app

@@ -2,7 +2,7 @@
 
 export REGISTRY="McPsGitHub"
 export REPOSITORY="todo-on-minikube"
-export IMAGE_TAG="lastest"
+export IMAGE_TAG="latest"
 
 # Clone the application repostry to the local machine
 git clone https://github.com/mcpsgithub/todo-on-minikube.git
