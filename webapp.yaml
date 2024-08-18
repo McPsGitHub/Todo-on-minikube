@@ -19,29 +19,6 @@ spec:
         image: McPsGitHub/todo-on-minikube:latest
         ports:
         - containerPort: 8080
-        env:
-        - name: MONGODB_INITDB_ROOT_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: mongodb-secret
-              key: MONGODB_INITDB_ROOT_USERNAME
-        - name: MONGODB_INITDB_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mongodb-secret
-              key: MONGODB_INITDB_ROOT_PASSWORD
-        - name: DB_URL
-          valueFrom:
-            configMapKeyRef:
-              name: mongodb-config
-              key: mongo-url 
-        - name: SECRET-KEY
-          valueFrom:
-            secretKeyRef:
-              name: mongodb-secret
-              key: SECRET-KEY
-        - name: MONGODB_URI
-          value: 'mongodb://$(MONGODB_USER):$(MONGODB_PASS)@$(MONGODB_HOST):$(MONGODB_PORT)/$(MONGODB_DB)?authSource=$(MONGODB_DB)'
 ---
 apiVersion: v1
 kind: Service
