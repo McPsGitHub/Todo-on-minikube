@@ -5,7 +5,6 @@ metadata:
   labels:
     app: mongodb
 spec:
-  serviceName: mongodb-service
   replicas: 1
   selector:
     matchLabels:
