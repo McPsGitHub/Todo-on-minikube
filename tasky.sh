@@ -11,7 +11,7 @@ git clone https://github.com/mcpsgithub/todo-on-minikube.git
 docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
 
 # Run webserver docker container
-run: docker run $REGISTRY/${REPO_FULL_NAME,,}:$IMAGE_TAG
+# run: docker run $REGISTRY/${REPO_FULL_NAME,,}:$IMAGE_TAG
 
 # name: Update MongoDB config and deploy MongoDB   
 kubectl apply -f mongodb-secret.yaml

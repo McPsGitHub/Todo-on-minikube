@@ -5,7 +5,7 @@ metadata:
   labels:
     app: tasky
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: tasky
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: tasky-webserver
-        image: 017820672665.dkr.ecr.us-east-2.amazonaws.com/wiz-technical-assessment:latest
+        image: McPsGitHub/todo-on-minikube:latest
         ports:
         - containerPort: 8080
         env:
