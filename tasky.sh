@@ -7,6 +7,9 @@ export IMAGE_TAG="latest"
 # Clone the application repostry to the local machine
 git clone https://github.com/mcpsgithub/todo-on-minikube.git
 
+# Change to new sub directory
+cd ./$REPOSITORY
+
 # Build webserver docker image locally 
 docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
 
