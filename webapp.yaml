@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: tasky-webserver
-        image: McPsGitHub/todo-on-minikube:latest
+        image: mcpsgithub/todo-on-minikube:latest
         ports:
         - containerPort: 8080
 ---

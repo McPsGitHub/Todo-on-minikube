@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export REGISTRY="McPsGitHub"
+export REGISTRY="mcpsgithub"
 export REPOSITORY="todo-on-minikube"
 export IMAGE_TAG="latest"
 
@@ -13,8 +13,8 @@ cd ./$REPOSITORY
 # Build webserver docker image locally 
 docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
 
-# Run webserver docker container
-# run: docker run $REGISTRY/${REPO_FULL_NAME,,}:$IMAGE_TAG
+# Push webserver container to local docker repository
+docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
 
 # name: Update MongoDB config and deploy MongoDB   
 kubectl apply -f mongodb-secret.yaml
